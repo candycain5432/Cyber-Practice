@@ -1,21 +1,31 @@
 const express = require("express")
+const cors = require("cors")
 
 const app = express()
 
-app.use(express.json())
-app.use(express.static("public"))
+// allow requests from anywhere (GitHub Pages etc)
+app.use(cors())
 
-app.post("/send", (req, res) => {
+// allow JSON
+app.use(express.json())
+
+// test route
+app.get("/", (req,res)=>{
+  res.send("Server running")
+})
+
+// receive messages
+app.post("/send",(req,res)=>{
 
   const message = req.body.message
 
-  console.log("Received message:", message)
+  console.log("Message received:", message)
 
   res.json({status:"ok"})
 })
 
 const PORT = process.env.PORT || 3000
 
-app.listen(PORT, () => {
+app.listen(PORT,()=>{
   console.log("Server running on port", PORT)
 })
