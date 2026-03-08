@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Send Message</title>
+</head>
+
+<body>
+
+<h2>Send a Message</h2>
+
+<input id="msg">
+<button onclick="send()">Send</button>
+
+<script>
+function send(){
+
+  const text = document.getElementById("msg").value
+
+  fetch("/send",{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({message:text})
+  })
+
+}
+</script>
+
+</body>
+</html>
