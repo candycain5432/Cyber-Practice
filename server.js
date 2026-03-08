@@ -1,6 +1,4 @@
 const express = require("express")
-const fs = require("fs")
-const path = require("path")
 
 const app = express()
 
@@ -11,9 +9,7 @@ app.post("/send", (req, res) => {
 
   const message = req.body.message
 
-  console.log("Received:", message)
-
-  fs.appendFileSync("messages.txt", message + "\n")
+  console.log("Received message:", message)
 
   res.json({status:"ok"})
 })
@@ -21,5 +17,5 @@ app.post("/send", (req, res) => {
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
-  console.log("Server running")
+  console.log("Server running on port", PORT)
 })

@@ -1,31 +1,56 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <title>Send Message</title>
+
+<style>
+body{
+font-family:Arial;
+padding:40px;
+}
+
+input{
+padding:10px;
+font-size:16px;
+}
+
+button{
+padding:10px;
+}
+</style>
+
 </head>
 
 <body>
 
-<h2>Send a Message</h2>
+<h2>Send Text</h2>
 
-<input id="msg">
-<button onclick="send()">Send</button>
+<input id="textBox" placeholder="Type something">
+<button onclick="sendMessage()">Send</button>
 
 <script>
-function send(){
 
-  const text = document.getElementById("msg").value
+function sendMessage(){
 
-  fetch("/send",{
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json"
-    },
-    body:JSON.stringify({message:text})
-  })
+const text = document.getElementById("textBox").value
+
+fetch("/send",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+message:text
+})
+})
+.then(res=>res.json())
+.then(data=>console.log(data))
 
 }
+
 </script>
 
 </body>
+
 </html>
